@@ -1,0 +1,16 @@
+act 0.2.17
+direnv 2.32.2
+golang 1.15.5
+helm 3.10.3
+hugo extended-0.109.0
+jq 1.6
+kind 0.17.0
+kubectl 1.26.0
+kustomize 4.5.7
+mc RELEASE.2020-11-25T23-04-07Z
+packer 1.8.5
+python 3.11.2
+terraform 1.3.6
+vagrant 2.3.4
+vendir 0.32.2
+yq v4.30.6
