@@ -12,6 +12,7 @@ mc RELEASE.2020-11-25T23-04-07Z
 packer 1.8.5
 python 3.11.2
 shfmt 3.6.0
+talosctl 1.3.5
 terraform 1.3.6
 vagrant 2.3.4
 vendir 0.32.2
