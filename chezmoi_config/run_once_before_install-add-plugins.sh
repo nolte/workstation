@@ -6,7 +6,7 @@ set -o pipefail
 
 asdfAddPluginIfNotExists() {
     PLUGIN_NAME=$1
-    PLUGIN_REPO=$2
+    PLUGIN_REPO=${2:''}
     if asdf plugin list | grep -q $PLUGIN_NAME; then
         echo "$PLUGIN_NAME plugin already installed"
     else
