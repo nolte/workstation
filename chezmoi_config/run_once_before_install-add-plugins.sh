@@ -17,3 +17,4 @@ asdfAddPluginIfNotExists() {
 asdfAddPluginIfNotExists vault
 asdfAddPluginIfNotExists terragrunt
 asdfAddPluginIfNotExists talosctl https://github.com/nolte/asdf-talosctl.git
+asdfAddPluginIfNotExists talhelper https://github.com/nolte/asdf-talhelper.git
