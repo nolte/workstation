@@ -1,9 +1,6 @@
 {
-    "extends":[
-       "github>nolte/gh-plumbing//renovate-configs/common#v1.0.7"
-    ],
-    "fileMatch": [
-      "(^|/)\\.tool-versions$",
-      "chezmoi_config/dot_tool-versions",
-    ] 
+  "extends": ["github>nolte/gh-plumbing//renovate-configs/common#v1.0.7"],
+  "asdf": {
+    "fileMatch": ["(^|/)\\.tool-versions$", "chezmoi_config/dot_tool-versions"]
+  }
 }
