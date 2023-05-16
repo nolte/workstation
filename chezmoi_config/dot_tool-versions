@@ -8,7 +8,7 @@ helm 3.12.0
 hugo extended-0.109.0
 jq 1.6
 kind 0.17.0
-kubectl 1.26.0
+kubectl 1.27.1
 kustomize 5.0.3
 mc RELEASE.2020-11-25T23-04-07Z
 packer 1.8.5
