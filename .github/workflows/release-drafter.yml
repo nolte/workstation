@@ -1,0 +1,16 @@
+---
+name: Release Drafter
+
+on:
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - develop
+
+jobs:
+  update_release_draft:
+    uses: nolte/gh-plumbing/.github/workflows/reuseable-release-drafter.yml@v1.0.19
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+
+

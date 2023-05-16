@@ -1,0 +1,5 @@
+_extends: gh-plumbing:.github/commons-settings.yml
+repository:
+  name: workstation
+  description: Local Workstation Configuration
+  topics: templating, dotfile, workstation
