@@ -12,5 +12,3 @@ jobs:
     uses: nolte/gh-plumbing/.github/workflows/reuseable-release-drafter.yml@v1.0.19
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
-
-

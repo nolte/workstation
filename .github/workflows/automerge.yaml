@@ -18,6 +18,10 @@ on:
       - completed
   status: {}
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   automerge:
     uses: nolte/gh-plumbing/.github/workflows/reuseable-automerge.yaml@v1.0.19
