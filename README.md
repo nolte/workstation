@@ -9,7 +9,7 @@ This Repository will be used for Configure a Different set of Workstations.
 ## Toolset
 
 * Ansible, for bootstrap the Device
-* [twpayne/chezmoi](https://github.com/twpayne/chezmoi) for sync configs between devices. 
+* [twpayne/chezmoi](https://github.com/twpayne/chezmoi) for sync configs between devices.
 
 ## Configurations
 
