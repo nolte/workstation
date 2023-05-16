@@ -3,7 +3,7 @@ argo 3.4.5
 argocd 2.7.2
 chezmoi 2.31.0
 direnv 2.32.2
-golang 1.15.5
+golang 1.20.4
 helm 3.12.0
 hugo extended-0.109.0
 jq 1.6
