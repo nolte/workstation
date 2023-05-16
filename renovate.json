@@ -1,5 +1,10 @@
 {
     "extends":[
        "github>nolte/gh-plumbing//renovate-configs/common#v1.0.7"
+    ],
+    "packageRules": [
+        {
+          "matchFiles": [".tool-versions","chezmoi_config/dot_tool-versions"]
+        }
     ]
 }
