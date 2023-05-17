@@ -3,7 +3,7 @@
 This Repository will be used for Configure a Different set of Workstations.
 
 ```sh
-
+chezmoi update
 ```
 
 ## Toolset
