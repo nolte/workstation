@@ -4,6 +4,7 @@ argocd 2.7.2
 chezmoi 2.31.0
 direnv 2.32.3
 golang 1.20.4
+gopass 1.15.5
 helm 3.12.0
 hugo extended-0.109.0
 jq 1.6
@@ -16,6 +17,7 @@ python 3.11.3
 shfmt 3.6.0
 talhelper 1.6.1
 talosctl 1.3.5
+task 3.25.0
 terraform 1.4.6
 vagrant 2.3.4
 vendir 0.32.2
