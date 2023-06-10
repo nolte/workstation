@@ -1,6 +1,6 @@
 act 0.2.42
 argo 3.4.5
-argocd 2.7.3
+argocd 2.7.4
 chezmoi 2.31.0
 direnv 2.32.3
 golang 1.20.4
