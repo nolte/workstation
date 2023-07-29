@@ -14,10 +14,12 @@ asdfAddPluginIfNotExists() {
     fi
 }
 
-asdfAddPluginIfNotExists vault
-asdfAddPluginIfNotExists terragrunt
-asdfAddPluginIfNotExists shellcheck
+asdfAddPluginIfNotExists argo
 asdfAddPluginIfNotExists argocd
-asdfAddPluginIfNotExists argo https://github.com/sudermanjr/asdf-argo.git
-asdfAddPluginIfNotExists talosctl https://github.com/nolte/asdf-talosctl.git
-asdfAddPluginIfNotExists talhelper https://github.com/nolte/asdf-talhelper.git
+asdfAddPluginIfNotExists shellcheck
+asdfAddPluginIfNotExists talhelper
+asdfAddPluginIfNotExists talosctl
+asdfAddPluginIfNotExists terragrunt
+asdfAddPluginIfNotExists vale
+asdfAddPluginIfNotExists vault
+asdfAddPluginIfNotExists k9s
