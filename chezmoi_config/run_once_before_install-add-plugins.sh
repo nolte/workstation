@@ -14,12 +14,31 @@ asdfAddPluginIfNotExists() {
     fi
 }
 
+asdfAddPluginIfNotExists act
 asdfAddPluginIfNotExists argo
 asdfAddPluginIfNotExists argocd
+asdfAddPluginIfNotExists direnv
+asdfAddPluginIfNotExists golang
+asdfAddPluginIfNotExists gopass
+asdfAddPluginIfNotExists helm
+asdfAddPluginIfNotExists hugo
+asdfAddPluginIfNotExists jq
+asdfAddPluginIfNotExists k9s
+asdfAddPluginIfNotExists kind
+asdfAddPluginIfNotExists kubectl
+asdfAddPluginIfNotExists kustomize
+asdfAddPluginIfNotExists mc
+asdfAddPluginIfNotExists packer
+asdfAddPluginIfNotExists python
 asdfAddPluginIfNotExists shellcheck
+asdfAddPluginIfNotExists shfmt
 asdfAddPluginIfNotExists talhelper
 asdfAddPluginIfNotExists talosctl
+asdfAddPluginIfNotExists task
+asdfAddPluginIfNotExists terraform
 asdfAddPluginIfNotExists terragrunt
+asdfAddPluginIfNotExists vagrant
 asdfAddPluginIfNotExists vale
 asdfAddPluginIfNotExists vault
-asdfAddPluginIfNotExists k9s
+asdfAddPluginIfNotExists vendir
+asdfAddPluginIfNotExists yq
