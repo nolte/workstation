@@ -23,4 +23,4 @@ terraform 1.6.4
 vagrant 2.3.4
 vale 2.28.1
 vendir 0.32.2
-yq v4.30.6
+yq 4.30.6

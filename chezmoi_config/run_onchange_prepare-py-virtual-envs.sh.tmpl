@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+set -u
+set -o pipefail
+
+VENV_BASEDIR=~/.venvs
+
+
+pyVirtualEnv() {
+    VENV_NAME=$1
+    VENV_DEPENDENCIES=${2:-''}
+    echo "{{.chezmoi.sourceDir}}"
+
+    python -m venv $VENV_BASEDIR/$VENV_NAME
+    source $VENV_BASEDIR/$VENV_NAME/bin/activate
+    pip install -r "{{.chezmoi.sourceDir}}/requirements-development.txt"
+    deactivate
+}
+
+# requirements-development.txt hash: {{ include "requirements-development.txt" | sha256sum }}
+# requirements-mkdocs.txt hash: {{ include "requirements-mkdocs.txt" | sha256sum }}
+
+pyVirtualEnv development requirements-development.txt
+pyVirtualEnv docs requirements-mkdocs.txt
