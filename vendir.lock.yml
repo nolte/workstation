@@ -1,9 +1,0 @@
-apiVersion: vendir.k14s.io/v1alpha1
-directories:
-- contents:
-  - git:
-      commitTitle: Update accept.txt (#73)
-      sha: 107a7ad2b7d22887052e6e657c2440f8522ab4d6
-    path: .
-  path: vendor
-kind: LockConfig
