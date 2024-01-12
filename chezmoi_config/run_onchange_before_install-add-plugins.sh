@@ -18,6 +18,7 @@ asdfAddPluginIfNotExists act
 asdfAddPluginIfNotExists argo
 asdfAddPluginIfNotExists argocd
 asdfAddPluginIfNotExists direnv
+asdfAddPluginIfNotExists github-cli https://github.com/bartlomiejdanek/asdf-github-cli.git
 asdfAddPluginIfNotExists golang
 asdfAddPluginIfNotExists gopass
 asdfAddPluginIfNotExists helm

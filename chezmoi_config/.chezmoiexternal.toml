@@ -1,0 +1,23 @@
+#!--zsh-start
+[".oh-my-zsh/custom/plugins/zsh-autocomplete"]
+    type = "git-repo"
+    url = "https://github.com/marlonrichert/zsh-autocomplete.git"
+    refreshPeriod = "168h"
+
+[".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+    type = "git-repo"
+    url = "https://github.com/zsh-users/zsh-autosuggestions.git"
+    refreshPeriod = "168h"
+
+[".oh-my-zsh/custom/plugins/fast-syntax-highlighting"]
+    type = "git-repo"
+    url = "https://github.com/zdharma-continuum/fast-syntax-highlighting.git"
+    refreshPeriod = "168h"
+#!--zsh-end
+
+#!--taskfile-start
+[".local/share/taskfile-collection"]
+    type = "git-repo"
+    url = "https://github.com/nolte/taskfiles.git"
+    refreshPeriod = "168h"
+#!--taskfile-end

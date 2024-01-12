@@ -1,0 +1,18 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  PYTHON_VENVS_BASEDIR: ~/.venvs/
+  TASKFILE_COLLECTION_BASE: ~/.local/share/taskfile-collection/src
+
+includes:
+  mkdocs: "{{ "{{" }} .TASKFILE_COLLECTION_BASE {{ "}}" }}/taskfile-include-mkdocs.yaml"
+  pre-commit: "{{ "{{" }} .TASKFILE_COLLECTION_BASE {{ "}}" }}/taskfile-include-pre-commit.yaml"
+
+tasks:
+  default:
+    desc: list commands
+    default: true
+    cmds:
+      - task --list

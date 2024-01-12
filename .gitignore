@@ -1,0 +1,7 @@
+site
+
+.github/styles/*
+!.github/styles/Vocab/
+
+.github/styles/Vocab/*
+!.github/styles/Vocab/Technical

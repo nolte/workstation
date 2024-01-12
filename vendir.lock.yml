@@ -1,9 +1,0 @@
-apiVersion: vendir.k14s.io/v1alpha1
-directories:
-- contents:
-  - git:
-      commitTitle: Add renovate.json (#54)...
-      sha: f5cd1c8d8bf57962b21349f9693b95e707abeed5
-    path: .
-  path: vendor
-kind: LockConfig
