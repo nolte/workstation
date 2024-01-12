@@ -19,7 +19,7 @@ python 3.12.1
 shfmt 3.7.0
 talhelper 1.8.0
 talosctl 1.4.6
-task 3.27.1
+task 3.33.1
 terraform 1.6.6
 vagrant 2.3.4
 vale 3.0.1
