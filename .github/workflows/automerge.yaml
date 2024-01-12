@@ -24,6 +24,6 @@ permissions:
 
 jobs:
   automerge:
-    uses: nolte/gh-plumbing/.github/workflows/reusable-automerge.yaml@v1.0.24
+    uses: nolte/gh-plumbing/.github/workflows/reusable-automerge.yaml@v1.1.8
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
