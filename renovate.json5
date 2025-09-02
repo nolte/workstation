@@ -1,9 +1,12 @@
 {
-  "extends": [
-    "github>nolte/gh-plumbing//renovate-configs/common#v1.1.11",
-    "group:all"
+  extends: [
+    'github>nolte/gh-plumbing//renovate-configs/common#v1.1.11',
+    'group:all',
   ],
-  "asdf": {
-    "fileMatch": ["(^|/)\\.tool-versions$", "chezmoi_config/dot_tool-versions"]
-  }
+  asdf: {
+    managerFilePatterns: [
+      '/(^|/)\\.tool-versions$/',
+      '/chezmoi_config/dot_tool-versions/',
+    ],
+  },
 }
