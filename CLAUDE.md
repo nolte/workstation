@@ -55,7 +55,7 @@ The `requirements-*.txt` files are listed in `chezmoi_config/.chezmoiignore` so 
 
 ### CI
 
-All workflows in `.github/workflows/` are thin wrappers that delegate to reusable workflows in `nolte/gh-plumbing` (currently pinned to `v1.1.11`):
+All workflows in `.github/workflows/` are thin wrappers that delegate to reusable workflows in `nolte/gh-plumbing`, each pinned to an immutable release tag (Renovate bumps them together):
 
 - `build-static-tests.yaml` — pre-commit + Trivy + chain-bench on push/PR to `develop`/`main`
 - `automerge.yaml` — label-driven auto-merge
