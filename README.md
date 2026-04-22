@@ -1,5 +1,8 @@
 # Workstation configuration
 
+[![Build](https://github.com/nolte/workstation/actions/workflows/build-static-tests.yaml/badge.svg)](https://github.com/nolte/workstation/actions/workflows/build-static-tests.yaml)
+[![Release Drafter](https://github.com/nolte/workstation/actions/workflows/release-drafter.yml/badge.svg)](https://github.com/nolte/workstation/actions/workflows/release-drafter.yml)
+[![Auto-merge](https://github.com/nolte/workstation/actions/workflows/automerge.yaml/badge.svg)](https://github.com/nolte/workstation/actions/workflows/automerge.yaml)
 
 <!--intro-start-->
 This project use [twpayne/chezmoi](https://github.com/twpayne/chezmoi) to set up a wide variety of developer systems.

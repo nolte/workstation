@@ -1,0 +1,20 @@
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+  id-token: write
+  pages: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deliver-docs:
+    uses: nolte/gh-plumbing/.github/workflows/reusable-mkdocs.yaml@v1.1.12
+    with:
+      requirements: docs/requirements.txt
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
