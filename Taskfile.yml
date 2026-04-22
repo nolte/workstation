@@ -1,0 +1,28 @@
+version: '3'
+
+tasks:
+  default:
+    desc: List available tasks
+    cmds:
+      - task --list
+    silent: true
+
+  lint:
+    desc: Run pre-commit hooks against all files
+    cmds:
+      - pre-commit run --all-files
+
+  test:
+    desc: Run prose linting via Vale
+    cmds:
+      - vale .
+
+  docs:
+    desc: Serve the MkDocs site locally
+    cmds:
+      - mkdocs serve
+
+  docs:build:
+    desc: Build the MkDocs site into ./site
+    cmds:
+      - mkdocs build --strict
