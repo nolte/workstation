@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   deliver-docs:
-    uses: nolte/gh-plumbing/.github/workflows/reusable-mkdocs.yaml@v1.1.12
+    uses: nolte/gh-plumbing/.github/workflows/reusable-mkdocs.yaml@v1.1.18
     with:
       requirements: docs/requirements.txt
     secrets:
