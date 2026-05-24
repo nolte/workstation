@@ -8,6 +8,6 @@ permissions:
 
 jobs:
   publish_release:
-    uses: nolte/gh-plumbing/.github/workflows/reusable-release-publish.yml@v1.1.18
+    uses: nolte/gh-plumbing/.github/workflows/reusable-release-publish.yml@v1.1.19
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
