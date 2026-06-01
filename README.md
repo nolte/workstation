@@ -1,12 +1,19 @@
-# Workstation configuration
+# workstation
 
 [![Build](https://github.com/nolte/workstation/actions/workflows/build-static-tests.yaml/badge.svg)](https://github.com/nolte/workstation/actions/workflows/build-static-tests.yaml)
 [![Release Drafter](https://github.com/nolte/workstation/actions/workflows/release-drafter.yml/badge.svg)](https://github.com/nolte/workstation/actions/workflows/release-drafter.yml)
 [![Auto-merge](https://github.com/nolte/workstation/actions/workflows/automerge.yaml/badge.svg)](https://github.com/nolte/workstation/actions/workflows/automerge.yaml)
 
 <!--intro-start-->
-This project use [twpayne/chezmoi](https://github.com/twpayne/chezmoi) to set up a wide variety of developer systems.
+This project uses [chezmoi](https://www.chezmoi.io/) to provision developer workstations from a single source tree: asdf-pinned CLI tool versions, a baseline git configuration, zsh plugins, and a reusable Taskfile collection. It targets developers who want a reproducible, idempotent setup across machines.
 <!--intro-end-->
+
+## Purpose
+
+- Provision a developer workstation deterministically with [chezmoi](https://www.chezmoi.io/): one `chezmoi init --apply` brings a fresh machine to a known state.
+- Pin CLI tool versions through [asdf](https://asdf-vm.com/) so every machine resolves the same versions, kept current by Renovate.
+- Ship a baseline git configuration, zsh plugins, and a reusable [Taskfile](https://taskfile.dev/) collection without per-machine hand-editing.
+- Aimed at the workstation operator applying this repository to their own machine — not at application code or project scaffolding.
 
 ## Features
 
@@ -18,7 +25,7 @@ Manage a set of extra Repositories, not managed at [asdf-vm/asdf-plugins](https:
 ### Git
 
 <!--git-start-->
-The basic Git configurations such as default branch are pre-configured.  
+The basic Git configurations such as default branch are pre-configured.
 <!--git-end-->
 
 ### zsh
@@ -33,31 +40,60 @@ The local terminal optimised with various extensions to further increase product
 reusable [go-task/task](https://github.com/go-task/task) pool, for works with the installed tools. More Information about the Different Tasks.
 <!--taskfile-end-->
 
-## Setup
+## Usage
 
-Before you can start, create a local configuration at `~/.config/chezmoi/chezmoi.toml` with some Information, required for the file generation process.
+### Initial setup
+
+Before you can start, create a local configuration at `~/.config/chezmoi/chezmoi.toml` with the information required for file generation:
 
 ```toml
 [data]
     git_email = "<EmailForGitConfig>"
     git_name  = "<NameForGitConfig>"
 ```
-more information at [chezmoi.io](https://www.chezmoi.io/reference/configuration-file/).
 
-Use this Repository as [dotfile](https://www.chezmoi.io/user-guide/setup/) basement.
+See the [chezmoi configuration reference](https://www.chezmoi.io/reference/configuration-file/) for details. Use this repository as your [dotfile](https://www.chezmoi.io/user-guide/setup/) source:
 
 ```sh
-$ chezmoi init --apply --verbose https://github.com/nolte/workstation.git
+chezmoi init --apply --verbose https://github.com/nolte/workstation.git
 ```
 
-## Usage
+### Day-to-day
 
-Useful Commands [chezmoi.io](https://www.chezmoi.io/quick-start/#start-using-chezmoi-on-your-current-machine)
+Pull the latest changes and apply them, or preview and apply local edits:
 
 ```sh
 chezmoi update
-```
-
-```sh
 chezmoi apply
 ```
+
+See the [chezmoi quick-start guide](https://www.chezmoi.io/quick-start/#start-using-chezmoi-on-your-current-machine) for more commands.
+
+## Structure
+
+```text
+.chezmoiroot            # points chezmoi at chezmoi_config/ as the source dir
+chezmoi_config/         # the chezmoi source tree applied to target machines
+  dot_tool-versions     # asdf tool versions (-> ~/.tool-versions)
+  dot_gitconfig.tmpl    # templated git config (-> ~/.gitconfig)
+  run_onchange_*.sh     # provisioning hooks (plugins, asdf install, venvs)
+  .chezmoiexternal.toml # external sources (zsh plugins, taskfile collection)
+docs/                   # MkDocs documentation source
+.github/                # CI workflows and repository configuration
+```
+
+Everything outside `chezmoi_config/` is repository tooling and is not delivered to target machines.
+
+## Related repositories
+
+- [nolte/gh-plumbing](https://github.com/nolte/gh-plumbing) — reusable GitHub workflows and Probot/Renovate presets this repository extends.
+- [nolte/taskfiles](https://github.com/nolte/taskfiles) — the reusable Taskfile collection fetched onto provisioned machines.
+- [nolte/vale-style](https://github.com/nolte/vale-style) — the Vale prose-style package used to lint this repository's docs.
+
+## Status
+
+Early stage, personal-use. Actively maintained for a single operator's Linux workstation; interfaces may change without notice.
+
+## License
+
+[MIT](LICENSE) © 2026 nolte
