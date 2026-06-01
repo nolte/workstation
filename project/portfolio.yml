@@ -1,0 +1,69 @@
+# Portfolio manifest for nolte/workstation.
+# Schema: spec/portfolio/portfolio-management/ §Capability inventory per repository
+# Audience references resolve against AUDIENCES.md at the repo root.
+
+capabilities:
+  - name: developer-workstation-provisioning
+    description: >-
+      A chezmoi source tree that provisions a developer workstation to an
+      identical, reproducible state from a single `chezmoi init --apply`:
+      asdf-pinned CLI tool versions, a baseline git config, a curated zsh
+      setup, the reusable Taskfile collection, and the pre-commit /
+      cookiecutter / MkDocs Python virtualenvs.
+    audience:
+      - workstation-operator
+      - downstream-tooling-consumers
+    status: active
+    rationale: >-
+      workstation is the single chezmoi source of truth for nolte's developer
+      machines; consolidating tool pins, dotfiles, and venvs here gives every
+      machine an identical $HOME layout and removes per-machine manual setup.
+    since: 2026-06-01
+
+# Repo-specific tech-stack layer over the inherited portfolio stack.
+# Schema: spec/portfolio/tech-stack/ §Entry schema, §Inheritance semantics.
+# chezmoi_config/ is delivered product content (target-machine tooling), not
+# this repository's own build stack, so its dot_tool-versions rows are excluded.
+tech_stack:
+  additions:
+    - name: chezmoi
+      kind: framework
+      group: build-tooling
+      role: >-
+        Dotfile and machine-state manager that renders this source tree and
+        applies it to target workstations via chezmoi init --apply / chezmoi
+        update; defines the repository's dot_/.tmpl/run_onchange_* layout.
+      status: active
+      lifecycle: all
+      version: 2.40.0
+      source_of_truth: .tool-versions
+
+    - name: python
+      kind: language
+      group: documentation
+      role: >-
+        Runtime for the MkDocs documentation build; provides mkdocs-material
+        via docs/requirements.txt for the repository's own docs site.
+      status: active
+      lifecycle: build
+      source_of_truth: docs/requirements.txt
+
+  overrides:
+    - name: claude-code
+      inherit: false
+      rationale: >-
+        workstation is a chezmoi source tree, not a Claude Code plugin host; it
+        ships no .claude-plugin/ and loads no skills or agents.
+
+    - name: claude-code-plugin
+      inherit: false
+      rationale: >-
+        workstation is not a Claude Code plugin source tree; it carries no
+        plugin/marketplace manifests and follows chezmoi layout conventions.
+
+    - name: markdownlint
+      inherit: false
+      rationale: >-
+        workstation does not wire markdownlint; its .pre-commit-config.yaml runs
+        only check-yaml, end-of-file-fixer, and trailing-whitespace, and there is
+        no .markdownlint* config.
