@@ -5,7 +5,22 @@ docs_dir: docs/
 repo_name: 'nolte/workstation'
 repo_url: 'https://github.com/nolte/workstation'
 plugins:
+  - search
   - include-markdown
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: de
+          name: Deutsch
+          build: true
+          nav_translations:
+            Home: Start
+            References: Referenzen
+            Package manager (asdf): Paketmanager (asdf)
 markdown_extensions:
   - pymdownx.inlinehilite:
   - pymdownx.superfences:
@@ -16,9 +31,9 @@ extra_css:
   - css/overwrite.css
 
 nav:
-  - Home: 'index.md'
-  - 'Configurations':
-    - 'Package Manager (asdf)': 'configurations/package-manager.md'
-    - 'Git': 'configurations/git.md'
-    - 'zsh': 'configurations/zsh.md'
-    - 'Taskfile' : 'configurations/taskfile.md'
+  - Home: index.md
+  - References:
+    - Package manager (asdf): configurations/package-manager.md
+    - Git: configurations/git.md
+    - zsh: configurations/zsh.md
+    - Taskfile: configurations/taskfile.md
