@@ -6,6 +6,11 @@ on:
     branches: [ "develop" ]
   schedule:
     - cron: '16 0 * * 1'
+  # Allow manually re-running the required checks against a branch tip.
+  # A GITHUB_TOKEN squash-merge does not re-trigger `push`, so the required
+  # `static / Static CI Tests` context never lands on the post-merge develop
+  # tip; workflow_dispatch lets the release pre-publish gate be satisfied.
+  workflow_dispatch:
 
 permissions:
   contents: read
