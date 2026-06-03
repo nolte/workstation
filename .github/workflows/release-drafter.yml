@@ -6,6 +6,9 @@ on:
     # branches to consider in the event; optional, defaults to all
     branches:
       - develop
+  # A GITHUB_TOKEN squash-merge does not re-trigger `push`, so the draft is
+  # not refreshed after an automerged PR; allow a manual refresh on develop.
+  workflow_dispatch:
 
 jobs:
   update_release_draft:
