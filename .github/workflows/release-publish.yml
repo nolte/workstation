@@ -2,6 +2,19 @@ name: Release Publish
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        type: string
+        description: |
+          Tag to publish. MUST match an existing release-drafter draft on the
+          default branch. No "newest wins" heuristic.
+      dry_run:
+        required: false
+        type: boolean
+        default: false
+        description: |
+          When true, run every validation gate but do not flip draft=false.
 
 permissions:
   contents: write
@@ -9,5 +22,8 @@ permissions:
 jobs:
   publish_release:
     uses: nolte/gh-plumbing/.github/workflows/reusable-release-publish.yml@v1.1.19
+    with:
+      tag: ${{ inputs.tag }}
+      dry_run: ${{ inputs.dry_run }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
