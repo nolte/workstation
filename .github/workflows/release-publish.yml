@@ -19,11 +19,20 @@ on:
 permissions:
   contents: write
 
+# When `vars.PORTFOLIO_APP_ID` is set, the reusable mints a short-lived
+# GitHub-App installation token from `secrets.PORTFOLIO_APP_PRIVATE_KEY` and
+# uses it for `gh release edit --draft=false`. App-authored release:published
+# events cascade to release-cd-refresh-master and release-cd-deliver-docs;
+# GITHUB_TOKEN-authored ones don't (see spec/project/workflow-health/
+# §Known platform constraints). When the variable is unset, the reusable
+# falls through to `secrets.token` (GITHUB_TOKEN) and the cascade gap remains.
 jobs:
   publish_release:
     uses: nolte/gh-plumbing/.github/workflows/reusable-release-publish.yml@v1.1.19
     with:
       tag: ${{ inputs.tag }}
       dry_run: ${{ inputs.dry_run }}
+      app-id: ${{ vars.PORTFOLIO_APP_ID }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
+      app-private-key: ${{ secrets.PORTFOLIO_APP_PRIVATE_KEY }}
