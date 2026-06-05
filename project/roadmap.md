@@ -18,4 +18,23 @@ starts without phases; add them here when phases become useful.
 
 ## Queue
 
-_(empty — items are added via `nolte-shared:roadmap-planner`)_
+```yaml
+id: R-1
+title: One-shot provisioning reaches a complete developer environment
+detail: fine
+outcomes: [O-1]
+target_sprint: null
+mvp: false
+status: proposed
+```
+
+On a freshly provisioned machine, `chezmoi init --apply` runs once and leaves a
+complete, ready-to-work developer environment — the asdf-pinned CLI toolchain,
+the configured zsh experience, the baseline git config, and the pre-commit /
+cookiecutter / MkDocs virtualenvs — with no follow-up manual installs. This item
+delivers and verifies that clean-machine end state, grounding outcome **O-1**.
+
+Features:
+
+- [ ] Clean-machine `chezmoi init --apply` reaches the complete environment end
+  state _(verifying feature — carries `verifies_sprint_value`; authored in P2)_
