@@ -16,7 +16,7 @@ last_updated: 2026-06-01
 %}
 
 
-Installiert eine vorausgewählte Kombination von Werkzeugen mit fixierten Versionen. Die Versionen werden von [Renovate](https://docs.renovatebot.com/) aktuell gehalten.
+Es wird eine feste Auswahl an Werkzeugen mit fixierten Versionen installiert. Die Versionen werden von [Renovate](https://docs.renovatebot.com/) aktuell gehalten.
 
 ```
 {%
