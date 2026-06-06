@@ -18,4 +18,26 @@ starts without phases; add them here when phases become useful.
 
 ## Queue
 
-_(empty — items are added via `nolte-shared:roadmap-planner`)_
+<!-- Items are added by `roadmap-planner`. Do not edit by hand. -->
+
+### R-1 — One-command provisioning of a complete developer workstation
+
+```yaml
+id: R-1
+title: One-command provisioning of a complete developer workstation
+detail: fine
+outcomes: [O-1]
+target_sprint: 1
+mvp: true
+status: proposed
+```
+
+The first end-to-end provisioning path: a `workstation-operator` runs a single
+`chezmoi init --apply` on a fresh machine and reaches a complete, ready-to-use
+developer environment (asdf-pinned CLI toolchain, the curated zsh setup, a git
+baseline, and the MkDocs / pre-commit virtualenvs) without any follow-up manual
+install. This item carries the sprint-1 value-verifying feature.
+
+Intended features:
+
+- [ ] One-command provisioning to a complete developer environment
