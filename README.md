@@ -5,7 +5,7 @@
 [![Auto-merge](https://github.com/nolte/workstation/actions/workflows/automerge.yaml/badge.svg)](https://github.com/nolte/workstation/actions/workflows/automerge.yaml)
 
 <!--intro-start-->
-This project uses [chezmoi](https://www.chezmoi.io/) to provision developer workstations from a single source tree: asdf-pinned CLI tool versions, a baseline git configuration, zsh plugins, and a reusable Taskfile collection. It targets developers who want a reproducible, idempotent setup across machines.
+This project uses [chezmoi](https://www.chezmoi.io/) to provision developer workstations from a single source tree: asdf-pinned command-line interface (CLI) tool versions, a baseline git configuration, zsh plugins, and a reusable Taskfile collection. It targets developers who want a reproducible, idempotent setup across machines.
 <!--intro-end-->
 
 ## Purpose
@@ -13,13 +13,13 @@ This project uses [chezmoi](https://www.chezmoi.io/) to provision developer work
 - Provision a developer workstation deterministically with [chezmoi](https://www.chezmoi.io/): one `chezmoi init --apply` brings a fresh machine to a known state.
 - Pin CLI tool versions through [asdf](https://asdf-vm.com/) so every machine resolves the same versions, kept current by Renovate.
 - Ship a baseline git configuration, zsh plugins, and a reusable [Taskfile](https://taskfile.dev/) collection without per-machine hand-editing.
-- Aimed at the workstation operator applying this repository to their own machine — not at application code or project scaffolding.
+- This repository targets the workstation operator applying it to their own machine — not application code or project scaffolding.
 
 ## Features
 
 ### Package manager (asdf)
 <!--asdf-start-->
-Manage a set of extra Repositories, not managed at [asdf-vm/asdf-plugins](https://github.com/asdf-vm/asdf-plugins/tree/master/plugins)
+Manage a set of extra repositories, not managed at [asdf-vm/asdf-plugins](https://github.com/asdf-vm/asdf-plugins/tree/master/plugins)
 <!--asdf-end-->
 
 ### Git
@@ -31,18 +31,20 @@ The basic Git configurations such as default branch are pre-configured.
 ### zsh
 
 <!--zsh-start-->
-The local terminal optimised with various extensions to further increase productivity.
+The local terminal is optimized with various extensions to further increase productivity.
 <!--zsh-end-->
 
 ### Taskfile
 
 <!--taskfile-start-->
-reusable [go-task/task](https://github.com/go-task/task) pool, for works with the installed tools. More Information about the Different Tasks.
+A reusable [go-task/task](https://github.com/go-task/task) collection for working with the installed tools.
 <!--taskfile-end-->
 
 ## Usage
 
 ### Initial setup
+
+Requires [chezmoi](https://www.chezmoi.io/install/) installed on the target machine.
 
 Before you can start, create a local configuration at `~/.config/chezmoi/chezmoi.toml` with the information required for file generation:
 
@@ -89,6 +91,16 @@ Everything outside `chezmoi_config/` is repository tooling and is not delivered 
 - [nolte/gh-plumbing](https://github.com/nolte/gh-plumbing) — reusable GitHub workflows and Probot/Renovate presets this repository extends.
 - [nolte/taskfiles](https://github.com/nolte/taskfiles) — the reusable Taskfile collection fetched onto provisioned machines.
 - [nolte/vale-style](https://github.com/nolte/vale-style) — the Vale prose-style package used to lint this repository's docs.
+
+## Development
+
+Repo-level checks run from the repository root via the root `Taskfile.yml`:
+
+- `task lint` — run `pre-commit` across all files.
+- `task test` — lint prose with Vale against the shared `nolte/vale-style` rules.
+- `task docs:build` — build the documentation site with `mkdocs build --strict`.
+
+The `develop` branch is the integration branch; `main` is fast-forwarded only on release publish.
 
 ## Status
 
