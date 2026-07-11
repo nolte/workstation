@@ -5,33 +5,75 @@
 [![Auto-merge](https://github.com/nolte/workstation/actions/workflows/automerge.yaml/badge.svg)](https://github.com/nolte/workstation/actions/workflows/automerge.yaml)
 
 <!--intro-start-->
-This project uses [chezmoi](https://www.chezmoi.io/) to provision developer workstations from a single source tree: asdf-pinned command-line interface (CLI) tool versions, a baseline git configuration, zsh plugins, and a reusable Taskfile collection. It targets developers who want a reproducible, idempotent setup across machines.
+A [chezmoi](https://www.chezmoi.io/) source tree that provisions a developer workstation from a single `chezmoi init --apply`: asdf-pinned command-line interface (CLI) tool versions, a baseline git configuration, zsh plugins, and a reusable Taskfile collection. For developers who want a reproducible, idempotent setup across machines.
 <!--intro-end-->
 
 ## Purpose
 
 - Provision a developer workstation deterministically with [chezmoi](https://www.chezmoi.io/): one `chezmoi init --apply` brings a fresh machine to a known state.
-- Pin CLI tool versions through [asdf](https://asdf-vm.com/) so every machine resolves the same versions, kept current by Renovate.
+- Pin CLI tool versions through [asdf](https://asdf-vm.com/) so every machine resolves the same versions, kept current by [Renovate](https://docs.renovatebot.com/).
 - Ship a baseline git configuration, zsh plugins, and a reusable [Taskfile](https://taskfile.dev/) collection without per-machine hand-editing.
-- This repository targets the workstation operator applying it to their own machine — not application code or project scaffolding.
+- Intended for the workstation operator applying it to their own machine — not application code or project scaffolding.
+
+## Usage
+
+Requires [chezmoi](https://www.chezmoi.io/install/) installed on the target machine.
+
+### Initial setup
+
+Create a local configuration at `~/.config/chezmoi/chezmoi.toml` with the data required for file generation:
+
+```toml
+[data]
+    git_email = "<EmailForGitConfig>"
+    git_name  = "<NameForGitConfig>"
+```
+
+See the [chezmoi configuration reference](https://www.chezmoi.io/reference/configuration-file/) for details. Then use this repository as your [dotfile](https://www.chezmoi.io/user-guide/setup/) source:
+
+```sh
+chezmoi init --apply --verbose https://github.com/nolte/workstation.git
+```
+
+### Day-to-day
+
+Pull the latest changes and apply them, or preview local edits before applying:
+
+```sh
+chezmoi update   # pull latest from this repo, then apply
+chezmoi apply    # render templates and write files into $HOME
+chezmoi diff     # preview changes before applying
+```
+
+See the [chezmoi quick-start guide](https://www.chezmoi.io/quick-start/#start-using-chezmoi-on-your-current-machine) for more commands.
+
+### Local development
+
+Repo-level checks run from the repository root via the root `Taskfile.yml` (needs the [go-task](https://taskfile.dev/) CLI on your `PATH`):
+
+```sh
+task lint        # run pre-commit across all files
+task test        # lint prose with Vale (nolte/vale-style)
+task docs:build  # build the documentation site (mkdocs build --strict)
+```
 
 ## Features
 
 ### Package manager (asdf)
 <!--asdf-start-->
-Manage a set of extra repositories, not managed at [asdf-vm/asdf-plugins](https://github.com/asdf-vm/asdf-plugins/tree/master/plugins)
+Adds asdf plugin repositories that aren't listed in the official [asdf-vm/asdf-plugins](https://github.com/asdf-vm/asdf-plugins/tree/master/plugins) index.
 <!--asdf-end-->
 
 ### Git
 
 <!--git-start-->
-The basic Git configurations such as default branch are pre-configured.
+Sets basic Git defaults, such as the default branch, out of the box.
 <!--git-end-->
 
 ### zsh
 
 <!--zsh-start-->
-The local terminal is optimized with various extensions to further increase productivity.
+Adds zsh plugins that make the interactive shell faster to work in.
 <!--zsh-end-->
 
 ### Taskfile
@@ -43,47 +85,16 @@ A reusable [go-task/task](https://github.com/go-task/task) collection for workin
 ### GitHub MCP server
 
 <!--github-mcp-start-->
-A global GitHub [MCP](https://modelcontextprotocol.io/) server is registered for every [Claude Code](https://www.claude.com/product/claude-code) project by merging a `github` entry into `~/.claude.json`. It authenticates with a GitHub Personal Access Token read from the `GITHUB_MCP_PAT` environment variable, so no secret is stored in this repository.
+Registers a global GitHub [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) server for every [Claude Code](https://www.claude.com/product/claude-code) project by merging a `github` entry into `~/.claude.json`. It authenticates with a GitHub Personal Access Token read from the `GITHUB_MCP_PAT` environment variable, so no secret is stored in this repository.
 
-Export the token **before** starting Claude Code — if the variable is unset, Claude Code fails to parse the configuration:
+Export the token **before** starting Claude Code — if the variable is unset, Claude Code fails to parse the configuration. The snippet below reads it from the authenticated [GitHub CLI](https://cli.github.com/) (run `gh auth login` first):
 
 ```sh
 export GITHUB_MCP_PAT="$(gh auth token)"
 ```
 
-Add that line to your shell startup file (for example `~/.zshrc`) so every session has it. The browser-based OAuth login (`claude mcp login`) is not usable here: the remote endpoint does not support OAuth dynamic client registration, which that flow requires.
+Add that line to your shell startup file (for example `~/.zshrc`) so every session has it. The browser-based OAuth login (`claude mcp login`) is not usable here, because that flow requires OAuth dynamic client registration, which the remote endpoint doesn't support.
 <!--github-mcp-end-->
-
-## Usage
-
-### Initial setup
-
-Requires [chezmoi](https://www.chezmoi.io/install/) installed on the target machine.
-
-Before you can start, create a local configuration at `~/.config/chezmoi/chezmoi.toml` with the information required for file generation:
-
-```toml
-[data]
-    git_email = "<EmailForGitConfig>"
-    git_name  = "<NameForGitConfig>"
-```
-
-See the [chezmoi configuration reference](https://www.chezmoi.io/reference/configuration-file/) for details. Use this repository as your [dotfile](https://www.chezmoi.io/user-guide/setup/) source:
-
-```sh
-chezmoi init --apply --verbose https://github.com/nolte/workstation.git
-```
-
-### Day-to-day
-
-Pull the latest changes and apply them, or preview and apply local edits:
-
-```sh
-chezmoi update
-chezmoi apply
-```
-
-See the [chezmoi quick-start guide](https://www.chezmoi.io/quick-start/#start-using-chezmoi-on-your-current-machine) for more commands.
 
 ## Structure
 
@@ -105,16 +116,6 @@ Everything outside `chezmoi_config/` is repository tooling and is not delivered 
 - [nolte/gh-plumbing](https://github.com/nolte/gh-plumbing) — reusable GitHub workflows and Probot/Renovate presets this repository extends.
 - [nolte/taskfiles](https://github.com/nolte/taskfiles) — the reusable Taskfile collection fetched onto provisioned machines.
 - [nolte/vale-style](https://github.com/nolte/vale-style) — the Vale prose-style package used to lint this repository's docs.
-
-## Development
-
-Repo-level checks run from the repository root via the root `Taskfile.yml`:
-
-- `task lint` — run `pre-commit` across all files.
-- `task test` — lint prose with Vale against the shared `nolte/vale-style` rules.
-- `task docs:build` — build the documentation site with `mkdocs build --strict`.
-
-The `develop` branch is the integration branch; `main` is fast-forwarded only on release publish.
 
 ## Status
 

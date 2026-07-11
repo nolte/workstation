@@ -1,5 +1,5 @@
 ---
-title: GitHub MCP
+title: GitHub MCP server
 audience: [workstation-operator]
 content_mode: reference
 track: user-docs
@@ -15,7 +15,7 @@ last_updated: 2026-07-11
    end="<!--github-mcp-end-->"
 %}
 
-The entry merged into `~/.claude.json` by `chezmoi_config/modify_dot_claude.json`:
+Der Eintrag, den `chezmoi_config/modify_dot_claude.json` in `~/.claude.json` einfügt:
 
 ```json
 {
@@ -27,4 +27,4 @@ The entry merged into `~/.claude.json` by `chezmoi_config/modify_dot_claude.json
 }
 ```
 
-Claude Code expands `${GITHUB_MCP_PAT}` from the environment at connect time. Verify the connection with `claude mcp list`; the `github` server should report `✔ Connected`.
+Claude Code löst `${GITHUB_MCP_PAT}` beim Verbindungsaufbau aus der Umgebung auf. Prüfe die Verbindung mit `claude mcp list`; der `github`-Server sollte `✔ Connected` melden.

@@ -1,5 +1,5 @@
 ---
-title: GitHub MCP
+title: GitHub MCP server
 audience: [workstation-operator]
 content_mode: reference
 track: user-docs

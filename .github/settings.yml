@@ -1,6 +1,6 @@
 _extends: gh-plumbing:.github/commons-settings.yml
 repository:
   name: workstation
-  description: Local Workstation Configuration
+  description: 'chezmoi source tree that provisions a developer workstation: asdf-pinned CLI tools, a baseline git config, zsh plugins, and a reusable Taskfile collection.'
   homepage: https://nolte.github.io/workstation/
-  topics: templating, dotfile, workstation
+  topics: chezmoi, asdf, dotfile, templating, workstation
