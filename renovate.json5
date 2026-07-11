@@ -9,4 +9,56 @@
       '/chezmoi_config/dot_tool-versions/',
     ],
   },
+  // Tools not on Renovate's built-in asdf allowlist (see
+  // https://docs.renovatebot.com/modules/manager/asdf/). The asdf manager
+  // silently ignores them, so we pin each to its upstream GitHub releases
+  // via a custom manager. extractVersion strips the tag prefix so the value
+  // written back matches the bare semver used in dot_tool-versions.
+  customManagers: [
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/chezmoi_config/dot_tool-versions/'],
+      matchStrings: ['k9s (?<currentValue>\\S+)'],
+      depNameTemplate: 'derailed/k9s',
+      datasourceTemplate: 'github-releases',
+      extractVersionTemplate: '^v(?<version>.+)$',
+      versioningTemplate: 'semver-coerced',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/chezmoi_config/dot_tool-versions/'],
+      matchStrings: ['jq (?<currentValue>\\S+)'],
+      depNameTemplate: 'jqlang/jq',
+      datasourceTemplate: 'github-releases',
+      extractVersionTemplate: '^jq-(?<version>.+)$',
+      versioningTemplate: 'semver-coerced',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/chezmoi_config/dot_tool-versions/'],
+      matchStrings: ['argo (?<currentValue>\\S+)'],
+      depNameTemplate: 'argoproj/argo-workflows',
+      datasourceTemplate: 'github-releases',
+      extractVersionTemplate: '^v(?<version>.+)$',
+      versioningTemplate: 'semver-coerced',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/chezmoi_config/dot_tool-versions/'],
+      matchStrings: ['gopass (?<currentValue>\\S+)'],
+      depNameTemplate: 'gopasspw/gopass',
+      datasourceTemplate: 'github-releases',
+      extractVersionTemplate: '^v(?<version>.+)$',
+      versioningTemplate: 'semver-coerced',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/chezmoi_config/dot_tool-versions/'],
+      matchStrings: ['vendir (?<currentValue>\\S+)'],
+      depNameTemplate: 'carvel-dev/vendir',
+      datasourceTemplate: 'github-releases',
+      extractVersionTemplate: '^v(?<version>.+)$',
+      versioningTemplate: 'semver-coerced',
+    },
+  ],
 }
