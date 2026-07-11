@@ -10,7 +10,7 @@ asdfAddPluginIfNotExists() {
     if asdf plugin list | grep -q $PLUGIN_NAME; then
         echo "$PLUGIN_NAME plugin already installed"
     else
-        asdf plugin-add $PLUGIN_NAME $PLUGIN_REPO
+        asdf plugin add $PLUGIN_NAME $PLUGIN_REPO
     fi
 }
 
