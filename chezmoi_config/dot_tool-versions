@@ -1,15 +1,15 @@
 act 0.2.89
-argo 3.4.5
+argo 4.0.7
 argocd 3.4.5
 chezmoi 2.40.0
 direnv 2.37.1
 github-cli 2.96.0
 golang 1.26.5
-gopass 1.15.5
+gopass 1.16.1
 hadolint 2.14.0
 helm 4.2.3
 hugo 0.164.0
-jq 1.6
+jq 1.8.2
 k9s 0.51.0
 kind 0.32.0
 kubectl 1.36.2
@@ -23,5 +23,5 @@ talosctl 1.13.6
 task 3.33.1
 terraform 1.15.8
 vale 3.0.1
-vendir 0.32.2
+vendir 0.46.0
 yq 4.53.3
