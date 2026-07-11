@@ -39,7 +39,6 @@ asdfAddPluginIfNotExists talosctl
 asdfAddPluginIfNotExists task
 asdfAddPluginIfNotExists terraform
 asdfAddPluginIfNotExists terragrunt
-asdfAddPluginIfNotExists vagrant
 asdfAddPluginIfNotExists vale
 asdfAddPluginIfNotExists vault
 asdfAddPluginIfNotExists vendir
