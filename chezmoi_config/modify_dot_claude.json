@@ -9,10 +9,16 @@
 #   - secrets that must NEVER live in this repo (oauthAccount, userID, machineID)
 #   - any other MCP server already registered (e.g. reachy-mini)
 #
-# The GitHub MCP server is the remote, OAuth-authenticated variant, so the
-# config entry carries no secret. Authenticate once per machine by running
-# `/mcp` in a Claude Code session (opens a browser login); the resulting
-# credentials are stored in the system keychain / credential store, not here.
+# The GitHub MCP server authenticates with a GitHub Personal Access Token passed
+# as an `Authorization: Bearer` header. The token itself is NOT stored here: the
+# header value is the literal placeholder `${GITHUB_MCP_PAT}`, which Claude Code
+# expands from the environment at connect time. Export GITHUB_MCP_PAT BEFORE
+# launching Claude Code (an unset placeholder makes Claude Code fail to parse the
+# config), e.g. `export GITHUB_MCP_PAT="$(gh auth token)"` — see the docs.
+#
+# Why a PAT and not the browser OAuth flow: the remote endpoint does not support
+# OAuth dynamic client registration (RFC 7591), which `claude mcp login` requires,
+# so the interactive browser login can never complete against this server.
 #
 # python3 (a system binary) is used instead of jq on purpose: this modify_
 # script runs during `chezmoi apply` BEFORE the run_onchange_after asdf step
@@ -58,6 +64,9 @@ data.setdefault("mcpServers", {})
 data["mcpServers"]["github"] = {
     "type": "http",
     "url": "https://api.githubcopilot.com/mcp/",
+    "headers": {
+        "Authorization": "Bearer ${GITHUB_MCP_PAT}",
+    },
 }
 
 # Match Claude Code’s own serialisation (2-space indent, raw UTF-8, no trailing
