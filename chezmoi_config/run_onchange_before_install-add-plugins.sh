@@ -21,6 +21,7 @@ asdfAddPluginIfNotExists direnv
 asdfAddPluginIfNotExists github-cli https://github.com/bartlomiejdanek/asdf-github-cli.git
 asdfAddPluginIfNotExists golang
 asdfAddPluginIfNotExists gopass
+asdfAddPluginIfNotExists hadolint https://github.com/looztra/asdf-hadolint.git
 asdfAddPluginIfNotExists helm
 asdfAddPluginIfNotExists hugo
 asdfAddPluginIfNotExists jq
