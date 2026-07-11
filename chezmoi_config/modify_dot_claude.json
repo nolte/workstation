@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#
+# chezmoi modify_ script for ~/.claude.json
+#
+# chezmoi pipes the current file contents to this script's stdin and replaces
+# the file with our stdout. We deliberately touch ONLY mcpServers.github and
+# preserve every other key untouched:
+#   - Claude Code's own churn (projects, caches, tips history)
+#   - secrets that must NEVER live in this repo (oauthAccount, userID, machineID)
+#   - any other MCP server already registered (e.g. reachy-mini)
+#
+# The GitHub MCP server is the remote, OAuth-authenticated variant, so the
+# config entry carries no secret. Authenticate once per machine by running
+# `/mcp` in a Claude Code session (opens a browser login); the resulting
+# credentials are stored in the system keychain / credential store, not here.
+#
+# python3 (a system binary) is used instead of jq on purpose: this modify_
+# script runs during `chezmoi apply` BEFORE the run_onchange_after asdf step
+# installs jq, so jq is not yet on PATH during a fresh bootstrap.
+
+set -e
+set -u
+set -o pipefail
+
+py="$(command -v python3 || command -v python || true)"
+if [ -z "$py" ]; then
+    echo "modify_dot_claude.json: no python interpreter found; leaving ~/.claude.json unchanged" >&2
+    cat
+    exit 0
+fi
+
+# NOTE: the program is passed via `-c` (an argv, not a heredoc). A heredoc
+# would occupy python's stdin and leave sys.stdin.read() empty, which would
+# collapse the whole file to just the github entry. With `-c`, stdin stays the
+# current ~/.claude.json that chezmoi piped in.
+"$py" -c '
+import json
+import sys
+
+raw = sys.stdin.read().strip()
+data = json.loads(raw) if raw else {}
+
+data.setdefault("mcpServers", {})
+data["mcpServers"]["github"] = {
+    "type": "http",
+    "url": "https://api.githubcopilot.com/mcp/",
+}
+
+# Match Claude Code’s own serialisation (2-space indent, raw UTF-8, no trailing
+# newline) so `chezmoi apply` only ever forces the github entry with no
+# cosmetic diff.
+json.dump(data, sys.stdout, indent=2, ensure_ascii=False)
+'
