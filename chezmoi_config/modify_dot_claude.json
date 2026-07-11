@@ -22,9 +22,23 @@ set -e
 set -u
 set -o pipefail
 
-py="$(command -v python3 || command -v python || true)"
+# Select the interpreter by TEST-EXECUTION, not by `command -v`. On a
+# provisioned machine python3/python (and jq) are asdf shims; when chezmoi runs
+# this script, asdf cannot resolve a version in that stripped env and the shim
+# exits 126 ("command found but not executable"). `command -v` is the trap: it
+# *finds* the shim, so a presence check passes, but executing it is what fails.
+# We therefore run each candidate and keep the first that actually exits 0.
+# System paths are ordered FIRST so a working system interpreter wins over a
+# broken shim on PATH.
+py=""
+for cand in /usr/bin/python3 /usr/local/bin/python3 /bin/python3 python3 python; do
+    if "$cand" -c '' >/dev/null 2>&1; then
+        py="$cand"
+        break
+    fi
+done
 if [ -z "$py" ]; then
-    echo "modify_dot_claude.json: no python interpreter found; leaving ~/.claude.json unchanged" >&2
+    echo "modify_dot_claude.json: no usable python interpreter found; leaving ~/.claude.json unchanged" >&2
     cat
     exit 0
 fi
