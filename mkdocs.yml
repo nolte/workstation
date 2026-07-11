@@ -21,6 +21,7 @@ plugins:
             Home: Start
             References: Referenzen
             Package manager (asdf): Paketmanager (asdf)
+            GitHub MCP server: GitHub-MCP-Server
 markdown_extensions:
   - pymdownx.inlinehilite:
   - pymdownx.superfences:
@@ -37,3 +38,4 @@ nav:
     - Git: configurations/git.md
     - zsh: configurations/zsh.md
     - Taskfile: configurations/taskfile.md
+    - GitHub MCP server: configurations/github-mcp.md

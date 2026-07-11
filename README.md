@@ -40,6 +40,20 @@ The local terminal is optimized with various extensions to further increase prod
 A reusable [go-task/task](https://github.com/go-task/task) collection for working with the installed tools.
 <!--taskfile-end-->
 
+### GitHub MCP server
+
+<!--github-mcp-start-->
+A global GitHub [MCP](https://modelcontextprotocol.io/) server is registered for every [Claude Code](https://www.claude.com/product/claude-code) project by merging a `github` entry into `~/.claude.json`. It authenticates with a GitHub Personal Access Token read from the `GITHUB_MCP_PAT` environment variable, so no secret is stored in this repository.
+
+Export the token **before** starting Claude Code — if the variable is unset, Claude Code fails to parse the configuration:
+
+```sh
+export GITHUB_MCP_PAT="$(gh auth token)"
+```
+
+Add that line to your shell startup file (for example `~/.zshrc`) so every session has it. The browser-based OAuth login (`claude mcp login`) is not usable here: the remote endpoint does not support OAuth dynamic client registration, which that flow requires.
+<!--github-mcp-end-->
+
 ## Usage
 
 ### Initial setup
