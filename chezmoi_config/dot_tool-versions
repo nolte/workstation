@@ -18,6 +18,7 @@ mc RELEASE.2020-11-25T23-04-07Z
 packer 1.15.4
 python 3.14.6
 shfmt 3.13.1
+skaffold 2.23.0
 talhelper 3.1.13
 talosctl 1.13.6
 task 3.33.1
