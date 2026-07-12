@@ -34,6 +34,7 @@ asdfAddPluginIfNotExists packer
 asdfAddPluginIfNotExists python
 asdfAddPluginIfNotExists shellcheck
 asdfAddPluginIfNotExists shfmt
+asdfAddPluginIfNotExists skaffold
 asdfAddPluginIfNotExists talhelper
 asdfAddPluginIfNotExists talosctl
 asdfAddPluginIfNotExists task
