@@ -1,5 +1,5 @@
 act 0.2.89
-argo 4.0.7
+argo 4.0.8
 argocd 3.4.5
 chezmoi 2.40.0
 direnv 2.37.1
@@ -12,15 +12,15 @@ hugo 0.164.0
 jq 1.8.2
 k9s 0.51.0
 kind 0.32.0
-kubectl 1.36.2
+kubectl 1.36.3
 kustomize 5.8.1
 mc RELEASE.2020-11-25T23-04-07Z
 packer 1.15.4
 python 3.14.6
 shfmt 3.13.1
-skaffold 2.23.0
-talhelper 3.1.13
-talosctl 1.13.6
+skaffold 2.24.0
+talhelper 3.1.15
+talosctl 1.13.7
 task 3.33.1
 terraform 1.15.8
 vale 3.0.1
