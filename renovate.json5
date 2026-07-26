@@ -14,6 +14,8 @@
   // silently ignores them, so we pin each to its upstream GitHub releases
   // via a custom manager. extractVersion strips the tag prefix so the value
   // written back matches the bare semver used in dot_tool-versions.
+  // mc is the one deliberate exception: its RELEASE.<timestamp> scheme is not
+  // sensibly versionable, so it stays untracked and is bumped by hand.
   customManagers: [
     {
       customType: 'regex',
@@ -56,6 +58,36 @@
       managerFilePatterns: ['/chezmoi_config/dot_tool-versions/'],
       matchStrings: ['vendir (?<currentValue>\\S+)'],
       depNameTemplate: 'carvel-dev/vendir',
+      datasourceTemplate: 'github-releases',
+      extractVersionTemplate: '^v(?<version>.+)$',
+      versioningTemplate: 'semver-coerced',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/chezmoi_config/dot_tool-versions/'],
+      matchStrings: ['vale (?<currentValue>\\S+)'],
+      depNameTemplate: 'errata-ai/vale',
+      datasourceTemplate: 'github-releases',
+      extractVersionTemplate: '^v(?<version>.+)$',
+      versioningTemplate: 'semver-coerced',
+    },
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/chezmoi_config/dot_tool-versions/'],
+      matchStrings: ['chezmoi (?<currentValue>\\S+)'],
+      depNameTemplate: 'twpayne/chezmoi',
+      datasourceTemplate: 'github-releases',
+      extractVersionTemplate: '^v(?<version>.+)$',
+      versioningTemplate: 'semver-coerced',
+    },
+    {
+      // go-task publishes a rolling `nightly` release alongside its tags; it
+      // carries GitHub's prerelease flag, so Renovate's default ignoreUnstable
+      // keeps it out of the update stream.
+      customType: 'regex',
+      managerFilePatterns: ['/chezmoi_config/dot_tool-versions/'],
+      matchStrings: ['task (?<currentValue>\\S+)'],
+      depNameTemplate: 'go-task/task',
       datasourceTemplate: 'github-releases',
       extractVersionTemplate: '^v(?<version>.+)$',
       versioningTemplate: 'semver-coerced',
